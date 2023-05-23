@@ -12,6 +12,11 @@ A custom extension for [AUTOMATIC1111/stable-diffusion-webui](https://github.com
 * Run as stable Diffusion extension inside the Stable Diffusion WebUI.
 * Run as standalone application
 
+# Tutorial
+There is a video to show how to use the extension
+
+[![How I Made 900 YouTube AI Lookbook Videos in 1 DAY for a Faceless YouTube Channel](https://img.youtube.com/vi/Ko-076NUCE8/sddefault.jpg)](https://www.youtube.com/watch?v=Ko-076NUCE8)
+
 # Stable Diffusion extension
 This project can be run as a stable Diffusion extension inside the Stable Diffusion WebUI.
 
@@ -32,6 +37,19 @@ This project can be run as a standalone application.
 * `python app.py`
 
 <img src="images/gradio.png" />
+
+# Bonus features
+There are bonus features for Patreon supporters.
+The bonus features include:
+ * background music fade out
+ * background color selection
+ * watermark overlay
+
+<img src="images/bonus.png" />
+
+☕️ Patreon bonus features 🍻
+https://bit.ly/432RDIk
+
 
 # Note
 * The script will randomly choose an audio file found in the background music directory as the background music for the video.
