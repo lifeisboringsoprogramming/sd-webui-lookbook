@@ -47,7 +47,7 @@ The bonus features include:
 
 <img src="images/bonus.png" />
 
-☕️ Patreon bonus features 🍻
+☕️ Get the Patreon bonus features here 🍻
 https://bit.ly/432RDIk
 
 
