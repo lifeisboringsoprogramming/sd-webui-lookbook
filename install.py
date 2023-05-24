@@ -11,7 +11,7 @@ def is_empty_line(line):
 def check_versions() -> None:
     requirements = [
         line
-        for line in (Path(__file__).parent / "requirements.txt")
+        for line in (Path(__file__).parent / "requirements_webui.txt")
         .read_text()
         .splitlines()
         if not is_empty_line(line)
@@ -20,7 +20,7 @@ def check_versions() -> None:
     try:
         from launch import run_pip  # from AUTOMATIC1111
 
-        run_pip(pip_command, desc="sd-webui-img2lookbook requirements.txt")
+        run_pip(pip_command, desc="sd-webui-img2lookbook requirements_webui.txt")
     except Exception as e:
         logger.exception(e)
 
