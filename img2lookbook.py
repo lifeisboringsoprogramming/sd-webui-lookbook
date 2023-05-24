@@ -49,6 +49,9 @@ class Img2Lookbook:
         clip_fg = clip_fg.set_duration(self.duration).set_fps(self.fps)
         clip_fg_init_size = clip_fg.size
 
+        # scale up for zooming effect
+        clip_effect = (clip_fg.fx(vfx.resize, 1.5))
+        
         # white block
         clip_white = None
         try:
@@ -71,19 +74,19 @@ class Img2Lookbook:
         def scale_up_func(t):
             current_scale = start_scale + \
                 (end_scale - start_scale) * (t / self.duration)
-            return current_scale
+            return current_scale / 1.5
 
         # Apply the zoom-in effect using the resize method
         video_zoom_in = CompositeVideoClip([
             clip_bg,
-            clip_fg.fx(vfx.resize, scale_up_func).set_position(
+            clip_effect.fx(vfx.resize, scale_up_func).set_position(
                 lambda t: ('center', 'center'))
         ])
 
         if clip_white:
             video_zoom_in = CompositeVideoClip([
                 clip_bg,
-                clip_fg.fx(vfx.resize, scale_up_func).set_position(
+                clip_effect.fx(vfx.resize, scale_up_func).set_position(
                     lambda t: ('center', 'center')),
                 clip_white.set_position((0, 0)),
                 clip_white.set_position(
@@ -92,7 +95,7 @@ class Img2Lookbook:
             if self.fit == "width":
                 video_zoom_in = CompositeVideoClip([
                     clip_bg,
-                    clip_fg.fx(vfx.resize, scale_up_func).set_position(
+                    clip_effect.fx(vfx.resize, scale_up_func).set_position(
                         lambda t: ('center', 'center')),
                     clip_white.set_position((0, 0)),
                     clip_white.set_position(
