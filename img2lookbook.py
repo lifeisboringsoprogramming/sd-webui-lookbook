@@ -193,11 +193,18 @@ def do_img2lookbook(
         img2lookbook_input_video_width,
         img2lookbook_input_video_height,
         img2lookbook_input_image_dir,
+        img2lookbook_random_images,
         img2lookbook_input_bg_music_dir,
         img2lookbook_input_duration,
         img2lookbook_input_zoom_factor,
         img2lookbook_input_fit,
-        img2lookbook_output_dir):
+        img2lookbook_output_dir,
+        img2lookbook_input_fadeout,
+        img2lookbook_input_bg_color,
+        img2lookbook_input_watermark_filepath,
+        img2lookbook_input_watermark_x,
+        img2lookbook_input_watermark_y,
+        img2lookbook_fit_image_duration_to_music):
 
     image_2_img2lookbook = Img2Lookbook(img2lookbook_input_video_width, img2lookbook_input_video_height,
                                           img2lookbook_input_duration, img2lookbook_input_fit, img2lookbook_input_zoom_factor)
@@ -209,9 +216,14 @@ def do_img2lookbook(
         raise gr.Error(f"Error processing video: {str(ex)}")
 
 
+def update_duration_interactive(choice):
+    return gr.update(interactive=not choice)
+
+
 def make_ui():
+    is_patreon = False
     with gr.Blocks(analytics_enabled=False) as ui_component:
-        gr.HTML(value="<p style='font-size: 1.4em; margin-bottom: 0.7em'>Watch 📺 <b><a href=\"https://youtu.be/Ko-076NUCE8\">video</a></b> for detailed explanation 🔍</p>")
+        gr.HTML(value="<p style='font-size: 1.4em; margin-bottom: 0.7em'>Watch 📺 <b><a href=\"https://www.youtube.com/@life-is-boring-so-programming\">video</a></b> for detailed explanation 🔍</p>")
 
         with gr.Row():
             with gr.Column():
@@ -239,9 +251,40 @@ def make_ui():
                     label='Zoom factor for each image animation', value=1.0, minimum=1.0, maximum=2.0, step=0.05, elem_id="img2lookbook_input_zoom_factor")
 
                 img2lookbook_input_fit = gr.Radio(["height", "width"], value="height", label="Fit",
-                                                   info="How the input images to be fitted into the video size", elem_id="img2lookbook_input_fit")
+                                                  info="How the input images to be fitted into the video size", elem_id="img2lookbook_input_fit")
 
-                gr.HTML(value="<p style='font-size: 1.4em; margin-top: 0.7em; margin-bottom: 0.7em'>👉 Add watermark, fadeout background music and change background color <b><a href=\"https://bit.ly/432RDIk\">here</a></b> 🦸</p>")
+                gr.HTML(value="<p style='font-size: 1.4em; margin-top: 0.7em; margin-bottom: 0.7em'>👉 Add watermark, randomize input images, fit image duration to music length, fadeout background music and change background color <b><a href=\"https://bit.ly/432RDIk\">here</a></b> 🦸</p>")
+
+                with gr.Row():
+                    img2lookbook_random = gr.Checkbox(
+                        interactive=is_patreon,
+                        label='[Patreon bonus] Randomize input images', value=False, elem_id="img2lookbook_random")
+
+                img2lookbook_fit_image_duration_to_music = gr.Checkbox(
+                        interactive=is_patreon,
+                    label='[Patreon bonus] Fit image duration to music length', value=False, elem_id="img2lookbook_fit_image_duration_to_music")
+
+                img2lookbook_input_fadeout = gr.Slider(
+                        interactive=is_patreon,
+                    label='[Patreon bonus] background music fadeout (second)', value=4.0, minimum=0.0, maximum=30.0, step=0.5, elem_id="img2lookbook_input_fadeout")
+
+                img2lookbook_input_bg_color = gr.ColorPicker(
+                        interactive=is_patreon,
+                    label='[Patreon bonus] background color', elem_id="img2lookbook_input_bg_color")
+
+                img2lookbook_input_watermark_filepath = gr.Textbox(
+                        interactive=is_patreon,
+                    label='[Patreon bonus] watermark filepath', elem_id="img2lookbook_input_watermark_filepath")
+
+                with gr.Row():
+                    with gr.Column():
+                        img2lookbook_input_watermark_x = gr.Slider(
+                        interactive=is_patreon,
+                            label='[Patreon bonus] watermark x position', value=10, minimum=0, maximum=1920*4, step=1, elem_id="img2lookbook_input_watermark_x")
+                    with gr.Column():
+                        img2lookbook_input_watermark_y = gr.Slider(
+                        interactive=is_patreon,
+                            label='[Patreon bonus] watermark y position', value=10, minimum=0, maximum=1080*4, step=1, elem_id="img2lookbook_input_watermark_y")
 
                 run_img2lookbook = gr.Button(
                     value="Run img2lookbook", variant='primary', elem_id="run_img2lookbook")
@@ -250,15 +293,25 @@ def make_ui():
                 output_video = gr.Video(
                     label='Output video', elem_id="img2lookbook_output_video")
 
+        # Disable img2lookbook_input_duration if enabled img2lookbook_fit_image_duration_to_music
+        img2lookbook_fit_image_duration_to_music.change(fn=update_duration_interactive, inputs=img2lookbook_fit_image_duration_to_music, outputs=img2lookbook_input_duration)
+
         run_img2lookbook.click(fn=do_img2lookbook, inputs=[
             img2lookbook_input_video_width,
             img2lookbook_input_video_height,
             img2lookbook_input_image_dir,
+            img2lookbook_random,
             img2lookbook_input_bg_music_dir,
             img2lookbook_input_duration,
             img2lookbook_input_zoom_factor,
             img2lookbook_input_fit,
-            img2lookbook_output_dir
+            img2lookbook_output_dir,
+            img2lookbook_input_fadeout,
+            img2lookbook_input_bg_color,
+            img2lookbook_input_watermark_filepath,
+            img2lookbook_input_watermark_x,
+            img2lookbook_input_watermark_y,
+            img2lookbook_fit_image_duration_to_music
         ], outputs=output_video, api_name="do_img2lookbook")
 
         return ui_component

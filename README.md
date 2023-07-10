@@ -41,6 +41,8 @@ This project can be run as a standalone application.
 # Bonus features
 There are bonus features for Patreon supporters.
 The bonus features include:
+ * randomize images
+ * match the duration of the images by the length of the music
  * background music fade out
  * background color selection
  * watermark overlay
