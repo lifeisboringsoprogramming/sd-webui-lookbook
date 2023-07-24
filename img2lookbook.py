@@ -253,7 +253,7 @@ def make_ui():
                 img2lookbook_input_fit = gr.Radio(["height", "width"], value="height", label="Fit",
                                                   info="How the input images to be fitted into the video size", elem_id="img2lookbook_input_fit")
 
-                gr.HTML(value="<p style='font-size: 1.4em; margin-top: 0.7em; margin-bottom: 0.7em'>👉 Add watermark, randomize input images, fit image duration to music length, fadeout background music and change background color <b><a href=\"https://bit.ly/432RDIk\">here</a></b> 🦸</p>")
+                gr.HTML(value="<p style='font-size: 1.4em; margin-top: 0.7em; margin-bottom: 0.7em'>👉 Add watermark, randomize input images, fit image duration to music length, fadeout background music and change background color <b style='color: red'><a href=\"https://bit.ly/432RDIk\">here</a></b> 🦸</p>")
 
                 with gr.Row():
                     img2lookbook_random = gr.Checkbox(
