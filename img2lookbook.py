@@ -223,7 +223,7 @@ def update_duration_interactive(choice):
 def make_ui():
     is_patreon = False
     with gr.Blocks(analytics_enabled=False) as ui_component:
-        gr.HTML(value="<p style='font-size: 1.4em; margin-bottom: 0.7em'>Watch 📺 <b><a href=\"https://www.youtube.com/@life-is-boring-so-programming\">video</a></b> for detailed explanation 🔍</p>")
+        gr.HTML(value="<p style='font-size: 1.4em; margin-bottom: 0.7em'>Watch 📺 <b style='color: red'><a href=\"https://www.patreon.com/posts/how-i-made-900-1-86265261\">video</a></b> for detailed explanation 🔍</p>")
 
         with gr.Row():
             with gr.Column():
