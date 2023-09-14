@@ -260,6 +260,10 @@ def make_ui():
                         interactive=is_patreon,
                         label='[Patreon bonus] Randomize input images', value=False, elem_id="img2lookbook_random")
 
+                img2lookbook_one_video_per_seed = gr.Checkbox(
+                        interactive=is_patreon,
+                    label='[Patreon bonus] Make one video per seed (for filename pattern [number]-[seed].png)', value=False, elem_id="img2lookbook_one_video_per_seed")
+
                 img2lookbook_fit_image_duration_to_music = gr.Checkbox(
                         interactive=is_patreon,
                     label='[Patreon bonus] Fit image duration to music length', value=False, elem_id="img2lookbook_fit_image_duration_to_music")
