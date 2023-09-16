@@ -42,6 +42,7 @@ This project can be run as a standalone application.
 There are bonus features for Patreon supporters.
 The bonus features include:
  * randomize images
+ * make one video per seed from the source folder
  * match the duration of the images by the length of the music
  * background music fade out
  * background color selection
